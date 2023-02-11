@@ -1,7 +1,7 @@
 <template>
   <header>
     <nav class="container">
-      <router-link to="/ ">
+      <router-link to="/">
         <img id="logo" src="/img/logo.png" alt="logo" />
       </router-link>
 
@@ -26,7 +26,7 @@
             <router-link to="/pessoas">Pessoa</router-link>
           </li>
           <li v-on:click="closeMenu">
-            <router-link to="/orders">Pedidos</router-link>
+            <router-link to="/pedidos">Pedidos</router-link>
           </li>
         </ul>
       </div>

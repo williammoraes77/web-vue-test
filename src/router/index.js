@@ -6,17 +6,14 @@ import OrdersView from "../views/OrdersView.vue";
 const routes = [
   {
     path: "/",
-
     component: HomeView,
   },
   {
     path: "/pessoas",
-
     component: PeopleView,
   },
   {
-    path: "/orders",
-
+    path: "/pedidos",
     component: OrdersView,
   },
 ];
