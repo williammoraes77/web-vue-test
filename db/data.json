@@ -7,10 +7,10 @@
       "dataNascimento": "1999-12-31"
     },
     {
-      "id": 2,
-      "nome": "cliente 2",
-      "cpf": "000.000.001-00",
-      "dataNascimento": "1999-12-31"
+      "nome": "will",
+      "cpf": "1234",
+      "dataNascimento": "2023-02-10",
+      "id": 2
     }
   ],
   "produtos": [

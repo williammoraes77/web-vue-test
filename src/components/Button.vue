@@ -1,12 +1,11 @@
 <template>
   <button :class="type">
+    <div v-if="type == 'primary'">Criar</div>
     <img class="icon" :src="icon" alt="" />
   </button>
 </template>
 
 <script>
-import editPng from "/public/img/edit.png";
-
 export default {
   name: "Footer",
   props: {
@@ -33,6 +32,14 @@ button {
 
 .danger {
   background-color: var(--color-danger);
+}
+
+.primary {
+  background-color: var(--color-primary);
+  display: flex;
+  padding: 10px 20px;
+  justify-content: space-between;
+  margin-right: 20px;
 }
 
 .icon {
