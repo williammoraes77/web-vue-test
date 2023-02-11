@@ -11,14 +11,15 @@
           </a>
         </div>
       </section> -->
+
       <table class="table">
-        <!-- <tr class="header-title">
+        <tr id="header-title">
           <th>ID</th>
           <th>Nome</th>
           <th>CPF</th>
           <th>Data de Nascimento</th>
           <th>Açoes</th>
-        </tr> -->
+        </tr>
         <tr v-for="order in orders" :key="order.id">
           <td>{{ order.id }}</td>
           <td>{{ order.cliente.nome }}</td>
@@ -70,10 +71,14 @@ table.table {
 .table td {
   text-align: left;
   padding: 0.25em;
+  width: 100%;
 }
 
 .table tr {
-  border-bottom: 1px solid #ddd;
+  /* width: 100%; */
+  display: flex;
+  border-bottom: 1px solid rgb(193, 184, 184);
+  padding: 10px 0;
 }
 td.edit-buttons {
   text-align: right;
@@ -114,6 +119,9 @@ button.delete {
   td.empty {
     flex: 1 0 90%;
     text-align: center;
+  }
+  #header-title {
+    display: none;
   }
 }
 

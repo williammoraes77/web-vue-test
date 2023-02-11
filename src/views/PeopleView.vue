@@ -11,22 +11,29 @@
           </a>
         </div>
       </section> -->
-      <table class="table">
-        <!-- <tr class="header-title">
+      <!-- <tr class="header-title">
           <th>ID</th>
           <th>Nome</th>
           <th>CPF</th>
           <th>Data de Nascimento</th>
           <th>Açoes</th>
         </tr> -->
+      <table class="table">
+        <tr id="header-title">
+          <th>ID</th>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Data de Nascimento</th>
+          <th>Açoes</th>
+        </tr>
         <tr v-for="person in people" :key="person.id">
           <td>{{ person.id }}</td>
           <td>{{ person.nome }}</td>
           <td>{{ person.cpf }}</td>
           <td>{{ person.dataNascimento }}</td>
           <td class="edit-buttons">
-            <button class="edit">Edit</button
-            ><button class="delete">Delete</button>
+            <Button title="Editar" type="success" :icon="icon_edit" />
+            <Button title="Deletar" type="danger" :icon="icon_delete" />
           </td>
         </tr>
       </table>
@@ -36,13 +43,16 @@
 
 <script>
 import api from "@/services/api";
+import Button from "@/components/Button.vue";
 
 export default {
   name: "PeopleView",
-  components: {},
+  components: { Button },
   data() {
     return {
       people: [],
+      icon_edit: "/img/edit.png",
+      icon_delete: "/img/delete.png",
     };
   },
   mounted() {
@@ -70,10 +80,14 @@ table.table {
 .table td {
   text-align: left;
   padding: 0.25em;
+  width: 100%;
 }
 
 .table tr {
-  border-bottom: 1px solid #ddd;
+  /* width: 100%; */
+  display: flex;
+  border-bottom: 1px solid rgb(193, 184, 184);
+  padding: 10px 0;
 }
 td.edit-buttons {
   text-align: right;
@@ -97,7 +111,7 @@ button.delete {
   background: #f69;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
   tr {
     display: flex;
     flex-direction: row;
@@ -114,6 +128,9 @@ button.delete {
   td.empty {
     flex: 1 0 90%;
     text-align: center;
+  }
+  #header-title {
+    display: none;
   }
 }
 
