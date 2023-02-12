@@ -11,6 +11,7 @@
             name="name"
             v-model="name"
             placeholder="Digite o nome"
+            required
           />
         </div>
         <div class="input-container">
@@ -21,18 +22,29 @@
             name="cpf"
             v-model="cpf"
             placeholder="Digite o CPF"
+            v-on:change="verifyCpf"
+            required
           />
         </div>
         <div class="input-container">
           <label for="date">Data de nascimento</label>
-          <input type="date" id="input_date" name="date" v-model="date" />
+          <input
+            type="date"
+            id="input_date"
+            name="date"
+            v-model="date"
+            required
+          />
         </div>
+
+        <Message :msg="msg" v-show="msg" :type="msg_type" />
 
         <div class="input-container">
           <input
             class="submit-btn"
             type="submit"
             value="Salvar"
+            id="submit-button"
             @click="updatePerson()"
           />
           <router-link to="/pessoas">
@@ -41,10 +53,13 @@
         </div>
       </form>
     </div>
-    <Modal :open="isOpen" @close="isOpen = !isOpen">
-      <router-link to="/pessoas">
-        <input class="submit-btn" type="submit" value="OK!" />
-      </router-link>
+    <Modal :open="isOpen" @close="isOpen = !isOpen" :closeBtn="false">
+      <div class="modal-contant">
+        <h1 class="title-success">Salvo com sucesso!</h1>
+        <router-link to="/pessoas">
+          <input class="submit-btn" type="submit" value="OK!" />
+        </router-link>
+      </div>
     </Modal>
   </main>
 </template>
@@ -52,6 +67,7 @@
 <script>
 import api from "@/services/api.js";
 import Modal from "@/components/Modal.vue";
+import Message from "@/components/Message.vue";
 import { ref } from "vue";
 
 export default {
@@ -62,73 +78,146 @@ export default {
       date: "",
       cpf: "",
       id: "",
+      msg: null,
+      msg_type: null,
     };
   },
-  components: { Modal },
+  components: { Modal, Message },
   methods: {
     async getPerson() {
-      await api
-        .get(`pessoas/${this.$route.params.usuario}`)
-        .then((response) => {
-          this.name = response.data.nome;
-          this.cpf = response.data.cpf;
-          this.date = response.data.dataNascimento;
-          this.id = response.data.id;
-          console.log(response);
-        });
+      this.msg = "";
+      try {
+        const response = await api
+          .get(`pessoas/${this.$route.params.usuario}`)
+          .then((response) => {
+            this.name = response.data.nome;
+            this.cpf = response.data.cpf;
+            this.date = response.data.dataNascimento;
+            this.id = response.data.id;
+            console.log(response);
+          });
+      } catch (error) {
+        console.log(error);
+        this.msg = "erro com o servidor, tente novamente mais tarde";
+        this.msg_type = "danger";
+      }
     },
     async updatePerson(e) {
       e.preventDefault();
 
+      if (!this.name) {
+        this.msg = "Campo NOME vazio";
+        this.msg_type = "danger";
+        return;
+      }
+      if (!this.cpf) {
+        this.msg = "Campo CPF vazio";
+        this.msg_type = "danger";
+        return;
+      }
+      if (!this.date) {
+        this.msg = "Campo DATA vazio";
+        this.msg_type = "danger";
+        return;
+      }
+
+      this.msg = "";
+      this.msg_type = "";
+
+      var strCPF = String(this.cpf).replace(/[^\d]/g, "");
+
       const data = {
         nome: this.name,
-        cpf: this.cpf,
+        cpf: strCPF
+          .match(/.{1,3}/g)
+          .join(".")
+          .replace(/\.(?=[^.]*$)/, "-"),
         dataNascimento: this.date,
       };
 
       const dataJson = JSON.stringify(data);
 
-      console.log(dataJson);
-
-      // const req = await fetch("http://localhost:3000/pessoas", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: dataJson,
-      // });
-
       const headers = {
         "Content-Type": "application/json",
       };
 
-      const response = await api.put(
-        `/pessoas/${this.$route.params.usuario}`,
-        dataJson,
-        {
-          headers,
-        }
-      );
-      // const response = await api.put(
-      //   `/pessoas/${this.$route.params.usuario}`,
-      //   `/pessoas/${this.id}`,
-      //   dataJson
-      // );
+      this.msg = "";
+      try {
+        const response = await api.put(
+          `/pessoas/${this.$route.params.usuario}`,
+          dataJson,
+          {
+            headers,
+          }
+        );
+        this.isOpen = true;
+      } catch (error) {
+        console.log(error);
+        this.msg = "erro com o servidor, tente novamente mais tarde";
+        this.msg_type = "danger";
+      }
 
-      // const res = await response.json();
-
-      console.log(response);
-
-      this.isOpen = true;
-
-      // this.msg = "Pedido realizado com sucesso!";
-
-      // // clear message
-      // setTimeout(() => (this.msg = ""), 3000);
-
-      // // limpar campos
-      // this.name = "";
-      // this.date = "";
-      // this.cpf = "";
       this.getPerson();
+    },
+    verifyCpf() {
+      const result = this.validaCpf(this.cpf);
+      const button1 = document.getElementById("submit-button");
+      if (!result) {
+        this.msg = "CPF inválido";
+        this.msg_type = "danger";
+
+        button1.disabled = true;
+      } else {
+        this.msg = "";
+        button1.disabled = false;
+      }
+    },
+
+    validaCpf(cpf) {
+      var Soma = 0;
+      var Resto;
+
+      var strCPF = String(cpf).replace(/[^\d]/g, "");
+
+      if (strCPF.length !== 11) return false;
+
+      if (
+        [
+          "00000000000",
+          "11111111111",
+          "22222222222",
+          "33333333333",
+          "44444444444",
+          "55555555555",
+          "66666666666",
+          "77777777777",
+          "88888888888",
+          "99999999999",
+        ].indexOf(strCPF) !== -1
+      )
+        return false;
+
+      for (let i = 1; i <= 9; i++)
+        Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
+
+      Resto = (Soma * 10) % 11;
+
+      if (Resto == 10 || Resto == 11) Resto = 0;
+
+      if (Resto != parseInt(strCPF.substring(9, 10))) return false;
+
+      Soma = 0;
+
+      for (let i = 1; i <= 10; i++)
+        Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
+
+      Resto = (Soma * 10) % 11;
+
+      if (Resto == 10 || Resto == 11) Resto = 0;
+
+      if (Resto != parseInt(strCPF.substring(10, 11))) return false;
+
+      return true;
     },
   },
   setup() {
@@ -171,7 +260,14 @@ label {
   margin-bottom: 15px;
   color: #222;
   padding: 5px 10px;
-  border-left: 4px solid #fcba03;
+  border-left: 4px solid var(--color-primary);
+}
+input {
+  border-radius: 10px;
+  border: 2px solid var(--color-primary);
+  height: 40px;
+  color: var(--color-primary);
+  font-size: 18px;
 }
 
 input,
@@ -211,5 +307,15 @@ select {
 .cancel-btn:hover {
   background-color: var(--color-danger);
   color: rgb(241, 234, 234);
+}
+.modal-contant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-success {
+  color: var(--color-success);
 }
 </style>

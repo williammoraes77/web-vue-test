@@ -8,12 +8,14 @@
           <!-- <button class="cancel-btn" type="button" @click="$emit('close')">
             Fechar
           </button> -->
-          <input
-            class="cancel-btn"
-            type="button"
-            value="Fechar"
-            @click="$emit('close')"
-          />
+          <div class="input-content" v-if="closeBtn">
+            <input
+              class="cancel-btn"
+              type="button"
+              value="Fechar"
+              @click="$emit('close')"
+            />
+          </div>
         </div>
       </div>
     </transition>
@@ -27,6 +29,7 @@ export default {
       type: Boolean,
       required: true,
     },
+    closeBtn: Boolean,
   },
 };
 </script>
@@ -85,6 +88,10 @@ export default {
 .cancel-btn:hover {
   background-color: var(--color-danger);
   color: rgb(241, 234, 234);
+}
+.input-content {
+  width: 100%;
+  display: flex;
 }
 
 @media (min-width: 700px) {

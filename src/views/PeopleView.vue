@@ -11,7 +11,9 @@
           @click="isOpen = true"
         />
       </div>
-      <input type="text" v-model="search" />
+      <dir class="search-content">
+        <input type="text" v-model="search" placeholder="Pesquise pelo nome" />
+      </dir>
 
       <table class="table">
         <tr id="header-title">
@@ -21,13 +23,13 @@
           <th>Data de Nascimento</th>
           <th>Açoes</th>
         </tr>
-        <tr v-for="person in people" :key="person.id">
+        <!-- <tr v-for="person in people" :key="person.id"> -->
+        <tr v-for="person in filteredItems" :key="person.id">
           <td>{{ person.id }}</td>
           <td>{{ person.nome }}</td>
           <td>{{ person.cpf }}</td>
           <td>{{ person.dataNascimento }}</td>
           <td class="edit-buttons">
-            <!-- <router-link to="/pessoa/editar" :person_id="person.id"> -->
             <router-link
               :to="{ name: 'person_edit', params: { usuario: person.id } }"
             >
@@ -44,9 +46,9 @@
         </tr>
       </table>
     </section>
-    <Message :msg="msg" v-show="msg" />
+    <Message :msg="msg" v-show="msg" :type="msg_type" />
   </main>
-  <Modal :open="isOpen" @close="isOpen = !isOpen">
+  <Modal :open="isOpen" @close="isOpen = !isOpen" :closeBtn="true">
     <form id="form-person" method="POST" @submit="createPerson">
       <div class="input-container">
         <label for="name">Nome da pessoa:</label>
@@ -72,16 +74,9 @@
         />
       </div>
 
-      <!-- <button type="button" @click="validateCpf()">verificar</button> -->
       <div class="input-container">
         <label for="date">Data de nascimento</label>
-        <input
-          type="date"
-          id="input_date"
-          name="date"
-          v-model="date"
-          required
-        />
+        <input type="date" id="input_date" name="date" v-model="date" />
       </div>
       <Message :msg="msg_modal" v-show="msg_modal" :type="modal_type" />
       <div class="input-container">
@@ -90,6 +85,7 @@
           type="submit"
           value="Cadastrar!"
           id="submit-button"
+          required
         />
       </div>
     </form>
@@ -101,6 +97,7 @@ import api from "@/services/api";
 import Button from "@/components/Button.vue";
 import Modal from "@/components/Modal.vue";
 import Message from "@/components/Message.vue";
+
 import { ref } from "vue";
 
 export default {
@@ -123,26 +120,57 @@ export default {
   },
   methods: {
     async getPeople() {
-      api.get("/pessoas").then((response) => {
-        this.people = response.data;
-      });
+      this.msg = "";
+      try {
+        const response = await api.get("/pessoas");
+        if (response.data) {
+          this.people = response.data;
+        }
+      } catch (error) {
+        console.log(error);
+        this.msg = "erro com o servidor, tente novamente mais tarde";
+        this.msg_type = "danger";
+      }
     },
 
     async deletePerson(id) {
-      const response = await api.delete(`/pessoas/${id}`);
-      console.log(response);
-
-      this.msg = "Pedido deletado com sucesso!";
-      this.msg = "danger";
-
-      // clear message
-      setTimeout(() => (this.msg = ""), 3000);
+      this.msg = "";
+      try {
+        const response = await api.delete(`/pessoas/${id}`);
+        if (response.data) {
+          this.msg = "Pessoa deletada com sucesso!";
+          this.msg = "danger";
+        }
+      } catch (error) {
+        console.log(error);
+        this.msg = "erro com o servidor, tente novamente mais tarde";
+        this.msg_type = "danger";
+      }
 
       this.getPeople();
     },
 
     async createPerson(e) {
       e.preventDefault();
+
+      if (!this.name) {
+        this.msg_modal = "Campo NOME vazio";
+        this.modal_type = "danger";
+        return;
+      }
+      if (!this.cpf) {
+        this.msg_modal = "Campo CPF vazio";
+        this.modal_type = "danger";
+        return;
+      }
+      if (!this.date) {
+        this.msg_modal = "Campo DATA vazio";
+        this.modal_type = "danger";
+        return;
+      }
+
+      this.msg_modal = "";
+      this.modal_type = "";
 
       var strCPF = String(this.cpf).replace(/[^\d]/g, "");
 
@@ -157,32 +185,32 @@ export default {
 
       const dataJson = JSON.stringify(data);
 
-      console.log(dataJson);
-
       const headers = {
         "Content-Type": "application/json",
       };
 
-      const response = await api.post("/pessoas", dataJson, { headers });
+      try {
+        const response = await api.post("/pessoas", dataJson, { headers });
 
-      console.log(response);
+        this.msg = "Pesoa cadastrada com sucesso!";
 
-      this.msg = "Pedido realizado com sucesso!";
-
-      // clear message
-      setTimeout(() => (this.msg = ""), 3000);
+        // clear message
+        setTimeout(() => (this.msg = ""), 3000);
+      } catch (error) {
+        console.log(error);
+        this.msg = "erro com o servidor, tente novamente mais tarde";
+        this.msg_type = "danger";
+      }
 
       this.name = "";
       this.date = "";
       this.cpf = "";
 
       this.isOpen = false;
-      // router.push({ path: "/pessoas" });
-      // router.go("/pessoas");
+
       this.$router.go();
     },
     validateCpf() {
-      console.log("tesseeee");
       const result = this.validaCpf(this.cpf);
       const button1 = document.getElementById("submit-button");
       if (!result) {
@@ -243,13 +271,15 @@ export default {
       return true;
     },
   },
-  //  computed: {
-  //   filteredItems () {
-  //     return this.items.filter(item => {
-  //        return item.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1
-  //     })
-  //   }
-  // },
+  computed: {
+    filteredItems() {
+      // console.log(this.people[0]);
+      return this.people.filter((item) => {
+        console.log(item.nome);
+        return item.nome.toLowerCase().indexOf(this.search.toLowerCase()) > -1;
+      });
+    },
+  },
   setup() {
     const isOpen = ref(false);
 
@@ -264,6 +294,27 @@ export default {
 <style scoped>
 main {
   align-items: center;
+}
+
+.search-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 20px 0;
+  padding-right: 10px;
+}
+
+input {
+  border-radius: 10px;
+  border: 2px solid var(--color-primary);
+  height: 40px;
+  color: var(--color-primary);
+  font-size: 18px;
+}
+.search-content input::placeholder {
+  color: var(--color-primary-light);
+  font-size: 18px;
 }
 
 .title-content {
