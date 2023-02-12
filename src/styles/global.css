@@ -7,6 +7,8 @@
   --color-success: #3aaa3d;
   --color-danger: #c92853;
   --color-primary: #6a5acd;
+  --color-primary-light: #9d92e8;
+  /* --color-primary-light: #b7afed; */
 }
 
 * {

@@ -4,7 +4,16 @@
       <div class="veu-modal-inner">
         <div class="vue-modal-content">
           <slot />
-          <button type="button" @click="$emit('close')">Close</button>
+          <!-- <button type="button" @click="$emit('close')">Close</button> -->
+          <!-- <button class="cancel-btn" type="button" @click="$emit('close')">
+            Fechar
+          </button> -->
+          <input
+            class="cancel-btn"
+            type="button"
+            value="Fechar"
+            @click="$emit('close')"
+          />
         </div>
       </div>
     </transition>
@@ -56,5 +65,31 @@ export default {
   background-clip: padding-box;
   border-radius: 0.3rem;
   padding: 1rem;
+}
+.cancel-btn {
+  background-color: rgb(220, 214, 214);
+  color: #3b3a39;
+  font-weight: bold;
+  border: 2px solid #222;
+  padding: 10px;
+  font-size: 16px;
+  margin: 10px auto;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.submit-btn:hover {
+  background-color: var(--color-primary-light);
+  color: #222;
+}
+.cancel-btn:hover {
+  background-color: var(--color-danger);
+  color: rgb(241, 234, 234);
+}
+
+@media (min-width: 700px) {
+  .vue-modal {
+    padding: 10% 30%;
+  }
 }
 </style>

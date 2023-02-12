@@ -3,6 +3,7 @@
     <section class="container">
       <div class="title-content">
         <h1>Pessoas</h1>
+
         <Button
           title="Adicionar"
           type="primary"
@@ -25,7 +26,13 @@
           <td>{{ person.cpf }}</td>
           <td>{{ person.dataNascimento }}</td>
           <td class="edit-buttons">
-            <Button title="Editar" type="success" :icon="icon_edit" />
+            <!-- <router-link to="/pessoa/editar" :person_id="person.id"> -->
+            <router-link
+              :to="{ name: 'person_edit', params: { usuario: person.id } }"
+            >
+              <Button title="Editar" type="success" :icon="icon_edit"
+            /></router-link>
+
             <Button
               title="Deletar"
               type="danger"
@@ -33,6 +40,9 @@
               @click="deletePerson(person.id)"
             />
           </td>
+          <Modal :open="isOpen" @close="isOpen = !isOpen">
+            <h1>{{ person.id }}</h1>
+          </Modal>
         </tr>
       </table>
     </section>
@@ -134,16 +144,15 @@ export default {
 
       console.log(response);
 
-      // this.msg = "Pedido realizado com sucesso!";
+      this.msg = "Pedido realizado com sucesso!";
 
       // clear message
-      // setTimeout(() => (this.msg = ""), 3000);
+      setTimeout(() => (this.msg = ""), 3000);
 
-      // // limpar campos
-      // this.nome = "";
-      // this.carne = "";
-      // this.pao = "";
-      // this.opcionais = [];
+      // limpar campos
+      this.name = "";
+      this.date = "";
+      this.cpf = "";
     },
   },
   setup() {
@@ -186,7 +195,6 @@ table.table {
 }
 
 .table tr {
-  /* width: 100%; */
   display: flex;
   border-bottom: 1px solid rgb(193, 184, 184);
   padding: 10px 0;
@@ -242,35 +250,9 @@ select {
   width: 300px;
 }
 
-#opcionais-container {
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-#opcionais-title {
-  width: 100%;
-}
-
-.checkbox-container {
-  display: flex;
-  align-items: flex-start;
-  width: 50%;
-  margin-bottom: 20px;
-}
-
-.checkbox-container span,
-.checkbox-container input {
-  width: auto;
-}
-
-.checkbox-container span {
-  margin-left: 6px;
-  font-weight: bold;
-}
-
 .submit-btn {
-  background-color: #222;
-  color: #fcba03;
+  background-color: var(--color-primary);
+  color: #e7e6e2;
   font-weight: bold;
   border: 2px solid #222;
   padding: 10px;
@@ -280,9 +262,25 @@ select {
   transition: 0.5s;
 }
 
+.cancel-btn {
+  background-color: rgb(220, 214, 214);
+  color: #3b3a39;
+  font-weight: bold;
+  border: 2px solid #222;
+  padding: 10px;
+  font-size: 16px;
+  margin: 10px auto;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
 .submit-btn:hover {
-  background-color: transparent;
+  background-color: var(--color-primary-light);
   color: #222;
+}
+.cancel-btn:hover {
+  background-color: var(--color-danger);
+  color: rgb(241, 234, 234);
 }
 /* end form */
 

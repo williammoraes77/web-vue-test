@@ -1,16 +1,22 @@
 {
   "pessoas": [
     {
-      "id": 1,
-      "nome": "cliente 1",
-      "cpf": "000.000.000-00",
-      "dataNascimento": "1999-12-31"
+      "nome": "cliente 2",
+      "cpf": "000.000.000-01",
+      "dataNascimento": "2000-01-01",
+      "id": 1
     },
     {
-      "nome": "will",
-      "cpf": "1234",
-      "dataNascimento": "2023-02-10",
+      "nome": "raquel",
+      "cpf": "12345",
+      "dataNascimento": "2023-01-30",
       "id": 2
+    },
+    {
+      "nome": "Marcos silva",
+      "cpf": "875567890222",
+      "dataNascimento": "2023-02-02",
+      "id": 3
     }
   ],
   "produtos": [

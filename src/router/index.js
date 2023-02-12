@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import PeopleView from "../views/PeopleView.vue";
+import PersonEditView from "../views/PersonEditView.vue";
 import OrdersView from "../views/OrdersView.vue";
 
 const routes = [
@@ -11,6 +12,11 @@ const routes = [
   {
     path: "/pessoas",
     component: PeopleView,
+  },
+  {
+    path: "/pessoa/editar/:usuario",
+    name: "person_edit",
+    component: PersonEditView,
   },
   {
     path: "/pedidos",
