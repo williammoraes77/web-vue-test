@@ -11,6 +11,7 @@
           @click="isOpen = true"
         />
       </div>
+      <input type="text" v-model="search" />
 
       <table class="table">
         <tr id="header-title">
@@ -40,12 +41,10 @@
               @click="deletePerson(person.id)"
             />
           </td>
-          <Modal :open="isOpen" @close="isOpen = !isOpen">
-            <h1>{{ person.id }}</h1>
-          </Modal>
         </tr>
       </table>
     </section>
+    <Message :msg="msg" v-show="msg" />
   </main>
   <Modal :open="isOpen" @close="isOpen = !isOpen">
     <form id="form-person" method="POST" @submit="createPerson">
@@ -57,6 +56,7 @@
           name="name"
           v-model="name"
           placeholder="Digite o nome"
+          required
         />
       </div>
       <div class="input-container">
@@ -67,15 +67,30 @@
           name="cpf"
           v-model="cpf"
           placeholder="Digite o CPF"
+          v-on:change="validateCpf"
+          required
         />
       </div>
+
+      <!-- <button type="button" @click="validateCpf()">verificar</button> -->
       <div class="input-container">
         <label for="date">Data de nascimento</label>
-        <input type="date" id="input_date" name="date" v-model="date" />
+        <input
+          type="date"
+          id="input_date"
+          name="date"
+          v-model="date"
+          required
+        />
       </div>
-
+      <Message :msg="msg_modal" v-show="msg_modal" :type="modal_type" />
       <div class="input-container">
-        <input class="submit-btn" type="submit" value="Cadastrar!" />
+        <input
+          class="submit-btn"
+          type="submit"
+          value="Cadastrar!"
+          id="submit-button"
+        />
       </div>
     </form>
   </Modal>
@@ -85,11 +100,12 @@
 import api from "@/services/api";
 import Button from "@/components/Button.vue";
 import Modal from "@/components/Modal.vue";
+import Message from "@/components/Message.vue";
 import { ref } from "vue";
 
 export default {
   name: "PeopleView",
-  components: { Button, Modal },
+  components: { Button, Modal, Message },
   data() {
     return {
       people: [],
@@ -99,6 +115,10 @@ export default {
       name: null,
       cpf: null,
       date: null,
+      msg: null,
+      msg_modal: null,
+      modal_type: null,
+      search: "",
     };
   },
   methods: {
@@ -112,15 +132,26 @@ export default {
       const response = await api.delete(`/pessoas/${id}`);
       console.log(response);
 
+      this.msg = "Pedido deletado com sucesso!";
+      this.msg = "danger";
+
+      // clear message
+      setTimeout(() => (this.msg = ""), 3000);
+
       this.getPeople();
     },
 
     async createPerson(e) {
       e.preventDefault();
 
+      var strCPF = String(this.cpf).replace(/[^\d]/g, "");
+
       const data = {
         nome: this.name,
-        cpf: this.cpf,
+        cpf: strCPF
+          .match(/.{1,3}/g)
+          .join(".")
+          .replace(/\.(?=[^.]*$)/, "-"),
         dataNascimento: this.date,
       };
 
@@ -128,19 +159,11 @@ export default {
 
       console.log(dataJson);
 
-      // const req = await fetch("http://localhost:3000/pessoas", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: dataJson,
-      // });
-
       const headers = {
         "Content-Type": "application/json",
       };
 
       const response = await api.post("/pessoas", dataJson, { headers });
-
-      // const res = await response.json();
 
       console.log(response);
 
@@ -149,12 +172,84 @@ export default {
       // clear message
       setTimeout(() => (this.msg = ""), 3000);
 
-      // limpar campos
       this.name = "";
       this.date = "";
       this.cpf = "";
+
+      this.isOpen = false;
+      // router.push({ path: "/pessoas" });
+      // router.go("/pessoas");
+      this.$router.go();
+    },
+    validateCpf() {
+      console.log("tesseeee");
+      const result = this.validaCpf(this.cpf);
+      const button1 = document.getElementById("submit-button");
+      if (!result) {
+        this.msg_modal = "CPF inválido";
+        this.modal_type = "danger";
+
+        button1.disabled = true;
+      } else {
+        this.msg_modal = "";
+        button1.disabled = false;
+      }
+    },
+
+    validaCpf(cpf) {
+      var Soma = 0;
+      var Resto;
+
+      var strCPF = String(cpf).replace(/[^\d]/g, "");
+
+      if (strCPF.length !== 11) return false;
+
+      if (
+        [
+          "00000000000",
+          "11111111111",
+          "22222222222",
+          "33333333333",
+          "44444444444",
+          "55555555555",
+          "66666666666",
+          "77777777777",
+          "88888888888",
+          "99999999999",
+        ].indexOf(strCPF) !== -1
+      )
+        return false;
+
+      for (let i = 1; i <= 9; i++)
+        Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
+
+      Resto = (Soma * 10) % 11;
+
+      if (Resto == 10 || Resto == 11) Resto = 0;
+
+      if (Resto != parseInt(strCPF.substring(9, 10))) return false;
+
+      Soma = 0;
+
+      for (let i = 1; i <= 10; i++)
+        Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
+
+      Resto = (Soma * 10) % 11;
+
+      if (Resto == 10 || Resto == 11) Resto = 0;
+
+      if (Resto != parseInt(strCPF.substring(10, 11))) return false;
+
+      return true;
     },
   },
+  //  computed: {
+  //   filteredItems () {
+  //     return this.items.filter(item => {
+  //        return item.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+  //     })
+  //   }
+  // },
   setup() {
     const isOpen = ref(false);
 
@@ -241,7 +336,7 @@ label {
   margin-bottom: 15px;
   color: #222;
   padding: 5px 10px;
-  border-left: 4px solid #fcba03;
+  border-left: 4px solid var(--color-primary);
 }
 
 input,
@@ -308,7 +403,6 @@ select {
 }
 
 * {
-  /* box-model: border-box; */
   font-family: "futura";
 }
 
