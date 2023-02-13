@@ -10,6 +10,19 @@
 
 <p>Esse projeto foi desenvolvido com a finalidade de teste em um processo seletivo.</p>
 
+## Funcionalidades
+
+Foi desenvolvido um projeto web responsivo front-end consumindo uma API Restful, com as seguitnes funcionalidades.
+
+- **Produtos**
+- Cadastrar - Listar - Filtrar - Editar - Excluir
+
+- **Clientes**
+- Cadastrar - Listar - Filtrar - Editar - Excluir
+
+- **Pedidos**
+- Cadastrar - Listar - Filtrar - Excluir
+
 ## Imagens
 
 <div align="center">
@@ -36,19 +49,6 @@ Tecnologias destacadas no projeto:
 - **vue-router**
 - **json-server**
 
-## Funcionalidades
-
-Funcionalidades:
-
-- **Produtos**
-- Cadastrar - Listar - Filtrar - Editar - Excluir
-
-- **Clientes**
-- Cadastrar - Listar - Filtrar - Editar - Excluir
-
-- **Pedidos**
-- Cadastrar - Listar - Filtrar - Excluir
-
 # 🤔 Como excutar
 
 ### Passo 1: Faça o clone ou download do projeto:
@@ -70,7 +70,7 @@ npm install
 ##### Web
 
 ```sh
-npm run server
+npm run serve
 ```
 
 ##### Backend
