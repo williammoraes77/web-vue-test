@@ -44,12 +44,13 @@
           <div class="items-conntent">
             <div class="item-card" v-for="item in order.itens" :key="item.id">
               <h3>{{ item.produto.descricao }}</h3>
-              <h3 class="title-md">{{ item.quantidade }} X {{ item.valor }}</h3>
+              <h3 class="title-md">{{ item.quantidade }} x {{ item.valor }}</h3>
               <h3 class="title-lg">R${{ item.subtotal }}</h3>
             </div>
           </div>
           <div class="total-conntent">
-            <h3 class="title-lg">Valor Total</h3>
+            <h3 class="title-md">Valor Total</h3>
+
             <h3 class="title-lg">R$ {{ order.valorTotal.toFixed(2) }}</h3>
           </div>
         </div>
@@ -67,8 +68,8 @@
           </option>
         </select>
       </div>
-      <div id="opcionais-container" class="input-container">
-        <label id="opcionais-title" for="opcionais"
+      <div id="products-container" class="input-container">
+        <label id="products-title" for="opcionais"
           >Selecione os produtos:</label
         >
         <div
@@ -322,12 +323,12 @@ select {
   font-size: 18px;
 }
 
-#opcionais-container {
+#products-container {
   flex-direction: row;
   flex-wrap: wrap;
 }
 
-#opcionais-title {
+#products-title {
   width: 100%;
 }
 
@@ -336,6 +337,7 @@ select {
   align-items: flex-start;
   width: 50%;
   margin-bottom: 20px;
+  align-items: center;
 }
 
 .checkbox-container span,
@@ -422,6 +424,23 @@ select {
   border-top: 2px solid var(--color-text-light);
 }
 
+.title-md {
+  font-size: 28px;
+  color: var(--color-text-light);
+}
+.title-lg {
+  font-size: 28px;
+  color: var(--color-success);
+}
+
+/* .total-conntent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  border-top: 2px solid var(--color-text-light);
+}
+
 .total-conntent h3 {
   margin-top: 15px;
   font-size: 16px;
@@ -441,6 +460,16 @@ select {
   font-size: 28px;
   color: var(--color-success);
 }
+
+.total-content .total-tile h3 {
+  font-size: 18px;
+  color: var(--color-text-light);
+}
+
+.title-md {
+  font-size: 12px;
+  color: var(--color-text-light);
+} */
 
 /* form */
 #form-product {

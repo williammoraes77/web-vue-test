@@ -19,7 +19,7 @@
       </div>
 
       <div class="item">
-        <router-link to="/pedidos">
+        <router-link to="/produtos">
           <div class="card">
             <img src="/img/box.png" alt="" />
             <h3>Produtos</h3>

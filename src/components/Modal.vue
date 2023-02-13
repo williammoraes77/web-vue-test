@@ -4,10 +4,7 @@
       <div class="veu-modal-inner">
         <div class="vue-modal-content">
           <slot />
-          <!-- <button type="button" @click="$emit('close')">Close</button> -->
-          <!-- <button class="cancel-btn" type="button" @click="$emit('close')">
-            Fechar
-          </button> -->
+
           <div class="input-content" v-if="closeBtn">
             <input
               class="cancel-btn"

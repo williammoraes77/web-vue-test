@@ -1,159 +1,124 @@
 {
   "pessoas": [
     {
-      "nome": "cliente 2",
-      "cpf": "000.000.000-01",
-      "dataNascimento": "2000-01-01",
+      "nome": "William",
+      "cpf": "605.482.500-30",
+      "dataNascimento": "1991-10-10",
       "id": 1
     },
     {
-      "nome": "will",
-      "cpf": "075.528.979-02",
-      "dataNascimento": "1991-10-10",
-      "id": 6
+      "nome": "Marcos",
+      "cpf": "229.629.290-95",
+      "dataNascimento": "1995-11-16",
+      "id": 2
     },
     {
-      "nome": "wlll",
-      "cpf": "075.528.979-02",
-      "dataNascimento": "2023-02-02",
-      "id": 8
-    },
-    {
-      "nome": "marcos silva",
-      "cpf": "089.570.989-92",
-      "dataNascimento": "2023-01-30",
-      "id": 10
-    },
-    {
-      "nome": "Salem",
-      "cpf": "075.528.979-02",
-      "dataNascimento": "2023-01-30",
-      "id": 11
+      "nome": "Fernanda",
+      "cpf": "525.112.910-61",
+      "dataNascimento": "2002-09-23",
+      "id": 3
     }
   ],
   "produtos": [
     {
-      "descricao": "produto 1",
-      "valoUnitario": 10.9,
+      "descricao": "Caneta",
+      "valoUnitario": 3,
       "id": 1
     },
     {
-      "descricao": "produto teste",
-      "valoUnitario": 50.67,
-      "id": 5
+      "descricao": "Caderno",
+      "valoUnitario": 22.55,
+      "id": 2
     },
     {
-      "descricao": "tester",
-      "valoUnitario": 23.45,
-      "id": 7
-    },
-    {
-      "descricao": "cerveja",
-      "valoUnitario": 9.99,
-      "id": 8
-    },
-    {
-      "descricao": "salgadinho",
-      "valoUnitario": 15.1,
-      "id": 9
+      "descricao": "Lapis",
+      "valoUnitario": 1.45,
+      "id": 3
     }
   ],
   "pedidos": [
     {
-      "id": 1,
       "cliente": {
         "id": 1,
-        "nome": "cliente 1"
-      },
-      "dataEmissao": "2019-01-01",
-      "valorTotal": 76.64,
-      "itens": [
-        {
-          "id": 1,
-          "produto": {
-            "id": 1,
-            "descricao": "produto 1"
-          },
-          "valor": 10,
-          "quantidade": 5,
-          "subtotal": 50
-        },
-        {
-          "id": 2,
-          "produto": {
-            "id": 2,
-            "descricao": "produto 2"
-          },
-          "valor": 8.88,
-          "quantidade": 3,
-          "subtotal": 26.64
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "cliente": {
-        "id": 1,
-        "nome": "will"
-      },
-      "dataEmissao": "2019-01-01",
-      "valorTotal": 76.64,
-      "itens": [
-        {
-          "id": 1,
-          "produto": {
-            "id": 1,
-            "descricao": "produto 1"
-          },
-          "valor": 10,
-          "quantidade": 5,
-          "subtotal": 50
-        },
-        {
-          "id": 2,
-          "produto": {
-            "id": 2,
-            "descricao": "produto 2"
-          },
-          "valor": 8.88,
-          "quantidade": 3,
-          "subtotal": 26.64
-        }
-      ]
-    },
-    {
-      "cliente": {
-        "id": 10,
-        "nome": "marcos silva"
+        "nome": "William"
       },
       "dataEmissao": "2023-2-13",
-      "valorTotal": 85.02,
+      "valorTotal": 27,
       "itens": [
         {
           "id": 1,
           "quantidade": 1,
-          "subtotal": 10.9,
+          "subtotal": 3,
           "produto": {
             "id": 1,
-            "descricao": "produto 1"
+            "descricao": "Caneta"
           }
         },
         {
           "id": 2,
           "quantidade": 1,
-          "subtotal": 50.67,
+          "subtotal": 22.55,
           "produto": {
-            "id": 5,
-            "descricao": "produto teste"
+            "id": 2,
+            "descricao": "Caderno"
           }
         },
         {
           "id": 3,
           "quantidade": 1,
-          "subtotal": 23.45,
+          "subtotal": 1.45,
           "produto": {
-            "id": 7,
-            "descricao": "tester"
+            "id": 3,
+            "descricao": "Lapis"
+          }
+        }
+      ],
+      "id": 1
+    },
+    {
+      "cliente": {
+        "id": 2,
+        "nome": "Marcos"
+      },
+      "dataEmissao": "2023-2-13",
+      "valorTotal": 4.45,
+      "itens": [
+        {
+          "id": 1,
+          "quantidade": 1,
+          "subtotal": 3,
+          "produto": {
+            "id": 1,
+            "descricao": "Caneta"
+          }
+        },
+        {
+          "id": 2,
+          "quantidade": 1,
+          "subtotal": 1.45,
+          "produto": {
+            "id": 3,
+            "descricao": "Lapis"
+          }
+        }
+      ],
+      "id": 2
+    },
+    {
+      "cliente": {
+        "id": 3,
+        "nome": "Fernanda"
+      },
+      "dataEmissao": "2023-2-13",
+      "valorTotal": 22.55,
+      "itens": [
+        {
+          "id": 1,
+          "quantidade": 1,
+          "subtotal": 22.55,
+          "produto": {
+            "id": 2,
+            "descricao": "Caderno"
           }
         }
       ],
@@ -161,164 +126,23 @@
     },
     {
       "cliente": {
-        "id": 11,
-        "nome": "Salem"
+        "id": 1,
+        "nome": "William"
       },
       "dataEmissao": "2023-2-13",
-      "valorTotal": 25.09,
+      "valorTotal": 3,
       "itens": [
         {
           "id": 1,
           "quantidade": 1,
-          "subtotal": 9.99,
+          "subtotal": 3,
           "produto": {
-            "id": 8,
-            "descricao": "cerveja"
-          }
-        },
-        {
-          "id": 2,
-          "quantidade": 1,
-          "subtotal": 15.1,
-          "produto": {
-            "id": 9,
-            "descricao": "salgadinho"
+            "id": 1,
+            "descricao": "Caneta"
           }
         }
       ],
       "id": 4
-    },
-    {
-      "cliente": {
-        "id": 11,
-        "nome": "Salem"
-      },
-      "dataEmissao": "2023-2-13",
-      "valorTotal": 110.10999999999999,
-      "itens": [
-        {
-          "id": 1,
-          "quantidade": 1,
-          "subtotal": 10.9,
-          "produto": {
-            "id": 1,
-            "descricao": "produto 1"
-          }
-        },
-        {
-          "id": 2,
-          "quantidade": 1,
-          "subtotal": 50.67,
-          "produto": {
-            "id": 5,
-            "descricao": "produto teste"
-          }
-        },
-        {
-          "id": 3,
-          "quantidade": 1,
-          "subtotal": 23.45,
-          "produto": {
-            "id": 7,
-            "descricao": "tester"
-          }
-        },
-        {
-          "id": 4,
-          "quantidade": 1,
-          "subtotal": 9.99,
-          "produto": {
-            "id": 8,
-            "descricao": "cerveja"
-          }
-        },
-        {
-          "id": 5,
-          "quantidade": 1,
-          "subtotal": 15.1,
-          "produto": {
-            "id": 9,
-            "descricao": "salgadinho"
-          }
-        }
-      ],
-      "id": 5
-    },
-    {
-      "cliente": {
-        "id": 11,
-        "nome": "Salem"
-      },
-      "dataEmissao": "2023-2-13",
-      "valorTotal": 9.99,
-      "itens": [
-        {
-          "id": 1,
-          "quantidade": 1,
-          "subtotal": 9.99,
-          "produto": {
-            "id": 8,
-            "descricao": "cerveja"
-          }
-        }
-      ],
-      "id": 6
-    },
-    {
-      "cliente": {
-        "id": 11,
-        "nome": "Salem"
-      },
-      "dataEmissao": "2023-2-13",
-      "valorTotal": 110.11,
-      "itens": [
-        {
-          "id": 1,
-          "quantidade": 1,
-          "subtotal": 23.45,
-          "produto": {
-            "id": 7,
-            "descricao": "tester"
-          }
-        },
-        {
-          "id": 2,
-          "quantidade": 1,
-          "subtotal": 10.9,
-          "produto": {
-            "id": 1,
-            "descricao": "produto 1"
-          }
-        },
-        {
-          "id": 3,
-          "quantidade": 1,
-          "subtotal": 50.67,
-          "produto": {
-            "id": 5,
-            "descricao": "produto teste"
-          }
-        },
-        {
-          "id": 4,
-          "quantidade": 1,
-          "subtotal": 9.99,
-          "produto": {
-            "id": 8,
-            "descricao": "cerveja"
-          }
-        },
-        {
-          "id": 5,
-          "quantidade": 1,
-          "subtotal": 15.1,
-          "produto": {
-            "id": 9,
-            "descricao": "salgadinho"
-          }
-        }
-      ],
-      "id": 7
     }
   ]
 }
