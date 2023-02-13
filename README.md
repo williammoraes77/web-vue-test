@@ -8,14 +8,14 @@
 
 </h1>
 
-<p>Esse projeto foi desenvolvido com a finalidade de teste em um processo seletivo</p>
+<p>Esse projeto foi desenvolvido com a finalidade de teste em um processo seletivo.</p>
 
 ## Imagens
 
 <div align="center">
-  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture1.png" alt="Imagem do projeto" height="200">
-  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture2.png" alt="App theme" height="200">
-  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture3.png" alt="App theme" height="200">
+  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture1.png" alt="Imagem do projeto" height="150">
+  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture2.png" alt="App theme" height="150">
+  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture3.png" alt="App theme" height="150">
   <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture4.png" alt="App theme" height="200">
   <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture5.png" alt="App theme" height="200">
   <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture6.png" alt="App theme" height="200">
