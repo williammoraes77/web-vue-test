@@ -59,7 +59,8 @@
   </main>
   <Modal :open="isOpen" @close="isOpen = !isOpen" :closeBtn="true">
     <form id="form-product" method="POST" @submit="createOrder">
-      <div class="input-container">
+      <!-- <div class="input-container"> -->
+      <div class="client-content">
         <label for="input_description">Selecione o cliente:</label>
         <select name="client" id="client" v-model="client" required>
           <option value="">Selecione o cliente</option>
@@ -498,6 +499,14 @@ input,
 select {
   padding: 5px 10px;
   width: 300px;
+}
+
+.client-content {
+  margin: 30px 0;
+}
+
+.client-content select {
+  margin-top: 30px;
 }
 
 .submit-btn {
