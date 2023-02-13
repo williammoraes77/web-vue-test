@@ -10,55 +10,62 @@
 
 <p>Esse projeto foi desenvolvido com a finalidade de teste em um processo seletivo</p>
 
-## GIF
-
-<div align="center">
-  <img align="center" src="https://github.com/williammoraes77/ignite-teams/blob/main/assets/ignite.gif" alt="App theme" height="425">
-</div>
-
-<hr />
-
 ## Imagens
 
 <div align="center">
-  <img align="center" src="https://github.com/williammoraes77/ignite-teams/blob/main/assets/items1-dark.png" alt="App theme" height="200">
-  <img align="center" src="https://github.com/williammoraes77/ignite-teams/blob/main/assets/items2-dark.png" alt="App theme" height="200">
-  <img align="center" src="https://github.com/williammoraes77/ignite-teams/blob/main/assets/items2-light.png" alt="App theme" height="200">
-  <img align="center" src="https://github.com/williammoraes77/ignite-teams/blob/main/assets/items3-dark.png" alt="App theme" height="200">
-  <img align="center" src="https://github.com/williammoraes77/ignite-teams/blob/main/assets/items4-dark.png" alt="App theme" height="200">
-  <img align="center" src="https://github.com/williammoraes77/ignite-teams/blob/main/assets/items4-light.png" alt="App theme" height="200">
-  <img align="center" src="https://github.com/williammoraes77/ignite-teams/blob/main/assets/items5-light.png" alt="App theme" height="200">
+  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture1.png" alt="Imagem do projeto" height="200">
+  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture2.png" alt="App theme" height="200">
+  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture3.png" alt="App theme" height="200">
+  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture4.png" alt="App theme" height="200">
+  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture5.png" alt="App theme" height="200">
+  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture6.png" alt="App theme" height="200">
+ 
 </div>
 
 <hr />
 
 ## Features
 
-[//]: # "Add the features of your project here:"
-
 Tecnologias destacadas no projeto:
 
-- **React Native**
-- **Styled Components**
-- **Async Storage**
-- **BigHeads**
-- **Expo**
+- **VueJs**
+- **Axios**
+- **vue-router**
+- **json-server**
+
+## Funcionalidades
+
+Funcionalidades:
+
+- **Produtos**
+- Cadastrar
+- Listar
+- Filtrar
+- Editar
+- Excluir
+
+- **Clientes**
+- Cadastrar
+- Listar
+- Filtrar
+- Editar
+- Excluir
+
+- **Pedidos**
+- Cadastrar
+- Listar
+- Filtrar
+- Excluir
 
 # 🤔 Como excutar
 
 ### Passo 1: Faça o clone ou download do projeto:
 
 ```sh
-git clone https://github.com/williammoraes77/ignite-teams
+git clone https://github.com/williammoraes77/web-vue-test.git
 ```
 
 ### Passo 2: Através do terminal acesse a pasta raiz do projeto e faça o download das dependências:
-
-#### Usando YARN
-
-```sh
-yarn install
-```
 
 #### Usando NPM
 
@@ -66,12 +73,26 @@ yarn install
 npm install
 ```
 
-### Passo 3: Executando os projetos nos emuladores:
+### Passo 3: Executando o projeto:
 
-##### Expo
+##### Web
 
 ```sh
-expo start
+npm run server
 ```
+
+##### Backend
+
+```sh
+npm run backend
+```
+
+### Passo 4: copiar o endereço local conforme a imagem e abrir pelo navegador:
+
+  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture7.png" alt="App theme" height="200">
+
+### Customize configuration
+
+See [Configuration Reference](https://cli.vuejs.org/config/).
 
 Desenvolvido por William Moraes 🚀
