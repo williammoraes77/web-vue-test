@@ -14,14 +14,14 @@
 
 <div align="center">
   <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture1.png" alt="Imagem do projeto" height="150">
-  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture2.png" alt="App theme" height="150">
-  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture3.png" alt="App theme" height="150">
+  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture2.png" alt="Imagem do projeto" height="150">
+  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture3.png" alt="Imagem do projeto" height="150">
   <br>
   <br>
   <br>
-  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture4.png" alt="App theme" height="200">
-  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture5.png" alt="App theme" height="200">
-  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture6.png" alt="App theme" height="200">
+  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture4.png" alt="Imagem do projeto" height="300">
+  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture5.png" alt="Imagem do projeto" height="300">
+  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture6.png" alt="Imagem do projeto" height="300">
  
 </div>
 
@@ -81,7 +81,7 @@ npm run backend
 
 ### Passo 4: copiar o endereço local conforme a imagem e abrir pelo navegador:
 
-  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture7.png" alt="App theme" height="200">
+  <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture7.png" alt="Imagem do projeto" height="200">
 
 ### Customize configuration
 
