@@ -23,6 +23,12 @@
       "cpf": "089.570.989-92",
       "dataNascimento": "2023-01-30",
       "id": 10
+    },
+    {
+      "nome": "Salem",
+      "cpf": "075.528.979-02",
+      "dataNascimento": "2023-01-30",
+      "id": 11
     }
   ],
   "produtos": [
@@ -40,6 +46,16 @@
       "descricao": "tester",
       "valoUnitario": 23.45,
       "id": 7
+    },
+    {
+      "descricao": "cerveja",
+      "valoUnitario": 9.99,
+      "id": 8
+    },
+    {
+      "descricao": "salgadinho",
+      "valoUnitario": 15.1,
+      "id": 9
     }
   ],
   "pedidos": [
@@ -73,6 +89,236 @@
           "subtotal": 26.64
         }
       ]
+    },
+    {
+      "id": 2,
+      "cliente": {
+        "id": 1,
+        "nome": "will"
+      },
+      "dataEmissao": "2019-01-01",
+      "valorTotal": 76.64,
+      "itens": [
+        {
+          "id": 1,
+          "produto": {
+            "id": 1,
+            "descricao": "produto 1"
+          },
+          "valor": 10,
+          "quantidade": 5,
+          "subtotal": 50
+        },
+        {
+          "id": 2,
+          "produto": {
+            "id": 2,
+            "descricao": "produto 2"
+          },
+          "valor": 8.88,
+          "quantidade": 3,
+          "subtotal": 26.64
+        }
+      ]
+    },
+    {
+      "cliente": {
+        "id": 10,
+        "nome": "marcos silva"
+      },
+      "dataEmissao": "2023-2-13",
+      "valorTotal": 85.02,
+      "itens": [
+        {
+          "id": 1,
+          "quantidade": 1,
+          "subtotal": 10.9,
+          "produto": {
+            "id": 1,
+            "descricao": "produto 1"
+          }
+        },
+        {
+          "id": 2,
+          "quantidade": 1,
+          "subtotal": 50.67,
+          "produto": {
+            "id": 5,
+            "descricao": "produto teste"
+          }
+        },
+        {
+          "id": 3,
+          "quantidade": 1,
+          "subtotal": 23.45,
+          "produto": {
+            "id": 7,
+            "descricao": "tester"
+          }
+        }
+      ],
+      "id": 3
+    },
+    {
+      "cliente": {
+        "id": 11,
+        "nome": "Salem"
+      },
+      "dataEmissao": "2023-2-13",
+      "valorTotal": 25.09,
+      "itens": [
+        {
+          "id": 1,
+          "quantidade": 1,
+          "subtotal": 9.99,
+          "produto": {
+            "id": 8,
+            "descricao": "cerveja"
+          }
+        },
+        {
+          "id": 2,
+          "quantidade": 1,
+          "subtotal": 15.1,
+          "produto": {
+            "id": 9,
+            "descricao": "salgadinho"
+          }
+        }
+      ],
+      "id": 4
+    },
+    {
+      "cliente": {
+        "id": 11,
+        "nome": "Salem"
+      },
+      "dataEmissao": "2023-2-13",
+      "valorTotal": 110.10999999999999,
+      "itens": [
+        {
+          "id": 1,
+          "quantidade": 1,
+          "subtotal": 10.9,
+          "produto": {
+            "id": 1,
+            "descricao": "produto 1"
+          }
+        },
+        {
+          "id": 2,
+          "quantidade": 1,
+          "subtotal": 50.67,
+          "produto": {
+            "id": 5,
+            "descricao": "produto teste"
+          }
+        },
+        {
+          "id": 3,
+          "quantidade": 1,
+          "subtotal": 23.45,
+          "produto": {
+            "id": 7,
+            "descricao": "tester"
+          }
+        },
+        {
+          "id": 4,
+          "quantidade": 1,
+          "subtotal": 9.99,
+          "produto": {
+            "id": 8,
+            "descricao": "cerveja"
+          }
+        },
+        {
+          "id": 5,
+          "quantidade": 1,
+          "subtotal": 15.1,
+          "produto": {
+            "id": 9,
+            "descricao": "salgadinho"
+          }
+        }
+      ],
+      "id": 5
+    },
+    {
+      "cliente": {
+        "id": 11,
+        "nome": "Salem"
+      },
+      "dataEmissao": "2023-2-13",
+      "valorTotal": 9.99,
+      "itens": [
+        {
+          "id": 1,
+          "quantidade": 1,
+          "subtotal": 9.99,
+          "produto": {
+            "id": 8,
+            "descricao": "cerveja"
+          }
+        }
+      ],
+      "id": 6
+    },
+    {
+      "cliente": {
+        "id": 11,
+        "nome": "Salem"
+      },
+      "dataEmissao": "2023-2-13",
+      "valorTotal": 110.11,
+      "itens": [
+        {
+          "id": 1,
+          "quantidade": 1,
+          "subtotal": 23.45,
+          "produto": {
+            "id": 7,
+            "descricao": "tester"
+          }
+        },
+        {
+          "id": 2,
+          "quantidade": 1,
+          "subtotal": 10.9,
+          "produto": {
+            "id": 1,
+            "descricao": "produto 1"
+          }
+        },
+        {
+          "id": 3,
+          "quantidade": 1,
+          "subtotal": 50.67,
+          "produto": {
+            "id": 5,
+            "descricao": "produto teste"
+          }
+        },
+        {
+          "id": 4,
+          "quantidade": 1,
+          "subtotal": 9.99,
+          "produto": {
+            "id": 8,
+            "descricao": "cerveja"
+          }
+        },
+        {
+          "id": 5,
+          "quantidade": 1,
+          "subtotal": 15.1,
+          "produto": {
+            "id": 9,
+            "descricao": "salgadinho"
+          }
+        }
+      ],
+      "id": 7
     }
   ]
 }
