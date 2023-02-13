@@ -1,6 +1,11 @@
 <template>
   <footer>
-    <p>William Moraes</p>
+    <a
+      class="link"
+      href="https://github.com/williammoraes77/web-vue-test"
+      target="_blank"
+      >Projeto VUE (Github)</a
+    >
   </footer>
 </template>
 
@@ -34,9 +39,8 @@ footer {
 .socialLink img {
   width: 20px;
 }
+
+.link {
+  color: var(--color-background);
+}
 </style>
-
-<!--
-mounted: usado quando a pagina for montada
-
- -->

@@ -4,7 +4,7 @@
       <h1>Editar</h1>
       <form id="form-person" method="PUT" @submit="updatePerson">
         <div class="input-container">
-          <label for="name">Nome da pessoa:</label>
+          <label for="name">Nome do cliente:</label>
           <input
             type="text"
             id="input_name"

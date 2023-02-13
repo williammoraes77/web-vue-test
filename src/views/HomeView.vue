@@ -2,18 +2,27 @@
   <main>
     <div class="home-items">
       <div class="item">
-        <router-link to="/pessoas">
-          <div class="card">
-            <img src="/img/user.png" alt="" />
-            <h3>Pessoas</h3>
-          </div>
-        </router-link>
-      </div>
-      <div class="item">
         <router-link to="/pedidos">
           <div class="card">
             <img src="/img/orders.png" alt="" />
             <h3>Pedidos</h3>
+          </div>
+        </router-link>
+      </div>
+      <div class="item">
+        <router-link to="/pessoas">
+          <div class="card">
+            <img src="/img/user.png" alt="" />
+            <h3>Clientes</h3>
+          </div>
+        </router-link>
+      </div>
+
+      <div class="item">
+        <router-link to="/pedidos">
+          <div class="card">
+            <img src="/img/box.png" alt="" />
+            <h3>Produtos</h3>
           </div>
         </router-link>
       </div>
@@ -60,7 +69,7 @@ main {
 
   .card {
     width: 100%;
-    padding: 70px;
+    padding: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;

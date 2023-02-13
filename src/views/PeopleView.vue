@@ -2,7 +2,7 @@
   <main>
     <section class="container">
       <div class="title-content">
-        <h1>Pessoas</h1>
+        <h1>Clientes</h1>
 
         <Button
           title="Adicionar"

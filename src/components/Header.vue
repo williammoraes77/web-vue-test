@@ -19,11 +19,12 @@
         <ul>
           <li v-on:click="closeMenu"><router-link to="/">Home</router-link></li>
           <li v-on:click="closeMenu">
-            <router-link to="/pessoas">Pessoas</router-link>
-          </li>
-          <li v-on:click="closeMenu">
             <router-link to="/pedidos">Pedidos</router-link>
           </li>
+          <li v-on:click="closeMenu">
+            <router-link to="/pessoas">Clientes</router-link>
+          </li>
+
           <li v-on:click="closeMenu">
             <router-link to="/produtos">Produtos</router-link>
           </li>
@@ -34,8 +35,6 @@
 </template>
 
 <script>
-import icon from "/public/img/menu-icon.png";
-
 export default {
   name: "Header",
   data() {
