@@ -7,7 +7,7 @@
 
       <img
         v-on:click="openMenu"
-        src="https://raw.githubusercontent.com/william-costa/wdev-mock-site-resources/master/assets/images/menu.svg"
+        src="/img/menu-icon.png"
         alt="Open menu"
         id="menu-button"
       />
@@ -15,11 +15,7 @@
       <div v-on:click="closeMenu" id="menu-overlay" v-if="menuActive"></div>
 
       <div id="menu-items" :class="{ active: menuActive }">
-        <img
-          src="https://raw.githubusercontent.com/william-costa/wdev-mock-site-resources/master/assets/images/wdev.svg"
-          alt="WDEV"
-          id="menu-logo"
-        />
+        <img src="/img/logo.png" alt="logo" id="menu-logo" />
         <ul>
           <li v-on:click="closeMenu"><router-link to="/">Home</router-link></li>
           <li v-on:click="closeMenu">
@@ -38,7 +34,7 @@
 </template>
 
 <script>
-import logo from "/public/img/logo.png";
+import icon from "/public/img/menu-icon.png";
 
 export default {
   name: "Header",
@@ -124,7 +120,7 @@ ul {
 }
 
 ul li a {
-  color: var(--color-text-light);
+  color: var(--color-background);
 }
 
 ul li {

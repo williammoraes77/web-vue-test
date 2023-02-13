@@ -5,7 +5,7 @@
         <h1>Pedidos</h1>
 
         <Button
-          title="Adicionar"
+          title="Adicionar pedido"
           type="primary"
           :icon="icon_plus"
           @click="isOpen = true"
@@ -262,7 +262,6 @@ export default {
         const response = await api.get(`produtos/${id}`);
 
         return response.data;
-        // console.log(response);
       } catch (error) {
         this.msg = "erro com o servidor, tente novamente mais tarde";
         this.msg_type = "danger";
@@ -368,9 +367,6 @@ select {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.order_id {
 }
 
 .order_actions {

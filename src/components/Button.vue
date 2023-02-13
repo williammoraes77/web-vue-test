@@ -1,6 +1,6 @@
 <template>
   <button :class="type">
-    <div v-if="type == 'primary'">Criar</div>
+    <div class="title-button" v-if="type == 'primary'">{{ title }}</div>
     <img class="icon" :src="icon" alt="" />
   </button>
 </template>
@@ -24,14 +24,17 @@ button {
   text-decoration: none;
   font-size: 16px;
   cursor: pointer;
+  border-radius: 8px;
 }
 
 .success {
   background-color: var(--color-success);
+  border-radius: 8px;
 }
 
 .danger {
   background-color: var(--color-danger);
+  border-radius: 8px;
 }
 
 .primary {
@@ -43,7 +46,11 @@ button {
 }
 
 .icon {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
+}
+
+.title-button {
+  margin-right: 10px;
 }
 </style>
