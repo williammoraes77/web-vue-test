@@ -12,7 +12,7 @@
 
 ## Funcionalidades
 
-Foi desenvolvido um projeto web responsivo front-end consumindo uma API Restful, com as seguitnes funcionalidades.
+Foi desenvolvido um projeto web responsivo front-end consumindo uma API Restful, com as seguintes funcionalidades.
 
 - **Produtos**
 - Cadastrar - Listar - Filtrar - Editar - Excluir
