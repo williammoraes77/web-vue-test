@@ -3,6 +3,8 @@ import HomeView from "../views/HomeView.vue";
 import PeopleView from "../views/PeopleView.vue";
 import PersonEditView from "../views/PersonEditView.vue";
 import OrdersView from "../views/OrdersView.vue";
+import ProductsView from "../views/ProductsView.vue";
+import ProductEditView from "../views/ProductEditView.vue";
 
 const routes = [
   {
@@ -21,6 +23,15 @@ const routes = [
   {
     path: "/pedidos",
     component: OrdersView,
+  },
+  {
+    path: "/produtos",
+    component: ProductsView,
+  },
+  {
+    path: "/produtos/editar/:produto",
+    name: "product_edit",
+    component: ProductEditView,
   },
 ];
 

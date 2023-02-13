@@ -1,38 +1,29 @@
 <template>
   <main>
     <div class="form-container">
-      <h1>Editar</h1>
+      <h1>Editar produto</h1>
       <form id="form-person" method="PUT" @submit="updatePerson">
         <div class="input-container">
-          <label for="name">Nome da pessoa:</label>
+          <label for="name">Descriçao:</label>
           <input
             type="text"
-            id="input_name"
-            name="name"
-            v-model="name"
-            placeholder="Digite o nome"
+            id="input_description"
+            name="description"
+            v-model="description"
+            placeholder="Digite a descriçao"
             required
           />
         </div>
         <div class="input-container">
-          <label for="cpf">CPF</label>
+          <label for="input_value">Valor</label>
           <input
-            type="text"
-            id="input_cpf"
-            name="cpf"
-            v-model="cpf"
-            placeholder="Digite o CPF"
-            v-on:change="verifyCpf"
-            required
-          />
-        </div>
-        <div class="input-container">
-          <label for="date">Data de nascimento</label>
-          <input
-            type="date"
-            id="input_date"
-            name="date"
-            v-model="date"
+            type="number"
+            step="0.01"
+            min="0"
+            id="input_value"
+            name="valoUnitario"
+            v-model="valoUnitario"
+            placeholder="Digite o valor"
             required
           />
         </div>
@@ -47,7 +38,7 @@
             id="submit-button"
             @click="updatePerson()"
           />
-          <router-link to="/pessoas">
+          <router-link to="/produtos">
             <input class="cancel-btn" type="button" value="Cancelar" />
           </router-link>
         </div>
@@ -56,7 +47,7 @@
     <Modal :open="isOpen" @close="isOpen = !isOpen" :closeBtn="false">
       <div class="modal-contant">
         <h1 class="title-success">Salvo com sucesso!</h1>
-        <router-link to="/pessoas">
+        <router-link to="/produtos">
           <input class="submit-btn" type="submit" value="OK!" />
         </router-link>
       </div>
@@ -71,30 +62,27 @@ import Message from "@/components/Message.vue";
 import { ref } from "vue";
 
 export default {
-  name: "PersonEdit",
+  name: "ProductEditView",
   data() {
     return {
-      name: "",
-      date: "",
-      cpf: "",
-      id: "",
+      description: "",
+      valoUnitario: "",
       msg: null,
       msg_type: null,
     };
   },
   components: { Modal, Message },
   methods: {
-    async getPerson() {
+    async getProduct() {
       this.msg = "";
       try {
         const response = await api
-          .get(`pessoas/${this.$route.params.usuario}`)
+          .get(`produtos/${this.$route.params.produto}`)
           .then((response) => {
-            this.name = response.data.nome;
-            this.cpf = response.data.cpf;
-            this.date = response.data.dataNascimento;
-            this.id = response.data.id;
+            this.description = response.data.descricao;
+            this.valoUnitario = response.data.valoUnitario;
           });
+        // console.log(response);
       } catch (error) {
         this.msg = "erro com o servidor, tente novamente mais tarde";
         this.msg_type = "danger";
@@ -103,18 +91,13 @@ export default {
     async updatePerson(e) {
       e.preventDefault();
 
-      if (!this.name) {
-        this.msg = "Campo NOME vazio";
+      if (!this.description) {
+        this.msg = "Campo DESCRIÇAO vazio";
         this.msg_type = "danger";
         return;
       }
-      if (!this.cpf) {
-        this.msg = "Campo CPF vazio";
-        this.msg_type = "danger";
-        return;
-      }
-      if (!this.date) {
-        this.msg = "Campo DATA vazio";
+      if (!this.valoUnitario) {
+        this.msg = "Campo VALOR vazio";
         this.msg_type = "danger";
         return;
       }
@@ -122,15 +105,9 @@ export default {
       this.msg = "";
       this.msg_type = "";
 
-      var strCPF = String(this.cpf).replace(/[^\d]/g, "");
-
       const data = {
-        nome: this.name,
-        cpf: strCPF
-          .match(/.{1,3}/g)
-          .join(".")
-          .replace(/\.(?=[^.]*$)/, "-"),
-        dataNascimento: this.date,
+        descricao: this.description,
+        valoUnitario: parseFloat(this.valoUnitario),
       };
 
       const dataJson = JSON.stringify(data);
@@ -142,7 +119,7 @@ export default {
       this.msg = "";
       try {
         const response = await api.put(
-          `/pessoas/${this.$route.params.usuario}`,
+          `/produtos/${this.$route.params.produto}`,
           dataJson,
           {
             headers,
@@ -154,67 +131,7 @@ export default {
         this.msg_type = "danger";
       }
 
-      this.getPerson();
-    },
-    verifyCpf() {
-      const result = this.validaCpf(this.cpf);
-      const button1 = document.getElementById("submit-button");
-      if (!result) {
-        this.msg = "CPF inválido";
-        this.msg_type = "danger";
-
-        button1.disabled = true;
-      } else {
-        this.msg = "";
-        button1.disabled = false;
-      }
-    },
-
-    validaCpf(cpf) {
-      var Soma = 0;
-      var Resto;
-
-      var strCPF = String(cpf).replace(/[^\d]/g, "");
-
-      if (strCPF.length !== 11) return false;
-
-      if (
-        [
-          "00000000000",
-          "11111111111",
-          "22222222222",
-          "33333333333",
-          "44444444444",
-          "55555555555",
-          "66666666666",
-          "77777777777",
-          "88888888888",
-          "99999999999",
-        ].indexOf(strCPF) !== -1
-      )
-        return false;
-
-      for (let i = 1; i <= 9; i++)
-        Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
-
-      Resto = (Soma * 10) % 11;
-
-      if (Resto == 10 || Resto == 11) Resto = 0;
-
-      if (Resto != parseInt(strCPF.substring(9, 10))) return false;
-
-      Soma = 0;
-
-      for (let i = 1; i <= 10; i++)
-        Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
-
-      Resto = (Soma * 10) % 11;
-
-      if (Resto == 10 || Resto == 11) Resto = 0;
-
-      if (Resto != parseInt(strCPF.substring(10, 11))) return false;
-
-      return true;
+      this.getProduct();
     },
   },
   setup() {
@@ -223,7 +140,7 @@ export default {
     return { isOpen };
   },
   created() {
-    this.getPerson();
+    this.getProduct();
   },
 };
 </script>

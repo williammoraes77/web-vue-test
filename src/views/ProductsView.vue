@@ -2,7 +2,7 @@
   <main>
     <section class="container">
       <div class="title-content">
-        <h1>Pessoas</h1>
+        <h1>Produtos</h1>
 
         <Button
           title="Adicionar"
@@ -12,26 +12,28 @@
         />
       </div>
       <dir class="search-content">
-        <input type="text" v-model="search" placeholder="Pesquise pelo nome" />
+        <input
+          type="text"
+          v-model="search"
+          placeholder="Digite a descriçao do produto"
+        />
       </dir>
 
       <table class="table">
         <tr id="header-title">
           <th>ID</th>
-          <th>Nome</th>
-          <th>CPF</th>
-          <th>Data de Nascimento</th>
+          <th>Descricao</th>
+          <th>Valor</th>
           <th>Açoes</th>
         </tr>
-        <!-- <tr v-for="person in people" :key="person.id"> -->
-        <tr v-for="person in filteredItems" :key="person.id">
-          <td>{{ person.id }}</td>
-          <td>{{ person.nome }}</td>
-          <td>{{ person.cpf }}</td>
-          <td>{{ person.dataNascimento }}</td>
+        <!-- <tr v-for="product in products" :key="product.id"> -->
+        <tr v-for="product in filteredItems" :key="product.id">
+          <td>{{ product.id }}</td>
+          <td>{{ product.descricao }}</td>
+          <td>{{ product.valoUnitario }}</td>
           <td class="edit-buttons">
             <router-link
-              :to="{ name: 'person_edit', params: { usuario: person.id } }"
+              :to="{ name: 'product_edit', params: { produto: product.id } }"
             >
               <Button title="Editar" type="success" :icon="icon_edit"
             /></router-link>
@@ -40,7 +42,7 @@
               title="Deletar"
               type="danger"
               :icon="icon_delete"
-              @click="deletePerson(person.id)"
+              @click="deleteProduct(product.id)"
             />
           </td>
         </tr>
@@ -49,34 +51,30 @@
     <Message :msg="msg" v-show="msg" :type="msg_type" />
   </main>
   <Modal :open="isOpen" @close="isOpen = !isOpen" :closeBtn="true">
-    <form id="form-person" method="POST" @submit="createPerson">
+    <form id="form-product" method="POST" @submit="createProduct">
       <div class="input-container">
-        <label for="name">Nome da pessoa:</label>
+        <label for="input_description">Descriçao do produto:</label>
         <input
           type="text"
-          id="input_name"
-          name="name"
-          v-model="name"
-          placeholder="Digite o nome"
+          id="input_description"
+          name="description"
+          v-model="description"
+          placeholder="Digite a descricao"
           required
         />
       </div>
       <div class="input-container">
-        <label for="cpf">CPF</label>
+        <label for="price">Valor</label>
         <input
-          type="text"
-          id="input_cpf"
-          name="cpf"
-          v-model="cpf"
-          placeholder="Digite o CPF"
-          v-on:change="validateCpf"
+          type="number"
+          step="0.01"
+          min="0"
+          id="price"
+          name="valoUnitario"
+          v-model="valoUnitario"
+          placeholder="Digite o preço"
           required
         />
-      </div>
-
-      <div class="input-container">
-        <label for="date">Data de nascimento</label>
-        <input type="date" id="input_date" name="date" v-model="date" />
       </div>
       <Message :msg="msg_modal" v-show="msg_modal" :type="modal_type" />
       <div class="input-container">
@@ -101,17 +99,16 @@ import Message from "@/components/Message.vue";
 import { ref } from "vue";
 
 export default {
-  name: "PeopleView",
+  name: "ProductsView",
   components: { Button, Modal, Message },
   data() {
     return {
-      people: [],
+      products: [],
       icon_edit: "/img/edit.png",
       icon_delete: "/img/delete.png",
       icon_plus: "/img/plus.png",
-      name: null,
-      cpf: null,
-      date: null,
+      descricao: null,
+      valoUnitario: null,
       msg: null,
       msg_modal: null,
       modal_type: null,
@@ -119,12 +116,12 @@ export default {
     };
   },
   methods: {
-    async getPeople() {
+    async getProducts() {
       this.msg = "";
       try {
-        const response = await api.get("/pessoas");
+        const response = await api.get("/produtos");
         if (response.data) {
-          this.people = response.data;
+          this.products = response.data;
         }
       } catch (error) {
         this.msg = "erro com o servidor, tente novamente mais tarde";
@@ -132,12 +129,12 @@ export default {
       }
     },
 
-    async deletePerson(id) {
+    async deleteProduct(id) {
       this.msg = "";
       try {
-        const response = await api.delete(`/pessoas/${id}`);
+        const response = await api.delete(`/produtos/${id}`);
         if (response.data) {
-          this.msg = "Pessoa deletada com sucesso!";
+          this.msg = "Produto deletado com sucesso!";
           this.msg = "danger";
         }
       } catch (error) {
@@ -145,24 +142,19 @@ export default {
         this.msg_type = "danger";
       }
 
-      this.getPeople();
+      this.getProducts();
     },
 
-    async createPerson(e) {
+    async createProduct(e) {
       e.preventDefault();
 
-      if (!this.name) {
-        this.msg_modal = "Campo NOME vazio";
+      if (!this.description) {
+        this.msg_modal = "Campo DESCRIÇAO vazio";
         this.modal_type = "danger";
         return;
       }
-      if (!this.cpf) {
-        this.msg_modal = "Campo CPF vazio";
-        this.modal_type = "danger";
-        return;
-      }
-      if (!this.date) {
-        this.msg_modal = "Campo DATA vazio";
+      if (!this.valoUnitario) {
+        this.msg_modal = "Campo VALOR vazio";
         this.modal_type = "danger";
         return;
       }
@@ -170,15 +162,9 @@ export default {
       this.msg_modal = "";
       this.modal_type = "";
 
-      var strCPF = String(this.cpf).replace(/[^\d]/g, "");
-
       const data = {
-        nome: this.name,
-        cpf: strCPF
-          .match(/.{1,3}/g)
-          .join(".")
-          .replace(/\.(?=[^.]*$)/, "-"),
-        dataNascimento: this.date,
+        descricao: this.description,
+        valoUnitario: parseFloat(this.valoUnitario),
       };
 
       const dataJson = JSON.stringify(data);
@@ -188,11 +174,10 @@ export default {
       };
 
       try {
-        const response = await api.post("/pessoas", dataJson, { headers });
+        const response = await api.post("/produtos", dataJson, { headers });
 
-        this.msg = "Pessoa cadastrada com sucesso!";
+        this.msg = "Produto cadastrado com sucesso!";
 
-        // clear message
         setTimeout(() => (this.msg = ""), 3000);
       } catch (error) {
         this.msg = "erro com o servidor, tente novamente mais tarde";
@@ -207,71 +192,14 @@ export default {
 
       this.$router.go();
     },
-    validateCpf() {
-      const result = this.validaCpf(this.cpf);
-      const button1 = document.getElementById("submit-button");
-      if (!result) {
-        this.msg_modal = "CPF inválido";
-        this.modal_type = "danger";
-
-        button1.disabled = true;
-      } else {
-        this.msg_modal = "";
-        button1.disabled = false;
-      }
-    },
-
-    validaCpf(cpf) {
-      var Soma = 0;
-      var Resto;
-
-      var strCPF = String(cpf).replace(/[^\d]/g, "");
-
-      if (strCPF.length !== 11) return false;
-
-      if (
-        [
-          "00000000000",
-          "11111111111",
-          "22222222222",
-          "33333333333",
-          "44444444444",
-          "55555555555",
-          "66666666666",
-          "77777777777",
-          "88888888888",
-          "99999999999",
-        ].indexOf(strCPF) !== -1
-      )
-        return false;
-
-      for (let i = 1; i <= 9; i++)
-        Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
-
-      Resto = (Soma * 10) % 11;
-
-      if (Resto == 10 || Resto == 11) Resto = 0;
-
-      if (Resto != parseInt(strCPF.substring(9, 10))) return false;
-
-      Soma = 0;
-
-      for (let i = 1; i <= 10; i++)
-        Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
-
-      Resto = (Soma * 10) % 11;
-
-      if (Resto == 10 || Resto == 11) Resto = 0;
-
-      if (Resto != parseInt(strCPF.substring(10, 11))) return false;
-
-      return true;
-    },
   },
   computed: {
     filteredItems() {
-      return this.people.filter((item) => {
-        return item.nome.toLowerCase().indexOf(this.search.toLowerCase()) > -1;
+      return this.products.filter((item) => {
+        console.log(item);
+        return (
+          item.descricao.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+        );
       });
     },
   },
@@ -281,7 +209,7 @@ export default {
     return { isOpen };
   },
   mounted() {
-    this.getPeople();
+    this.getProducts();
   },
 };
 </script>
@@ -363,7 +291,7 @@ button.delete {
 }
 
 /* form */
-#form-person {
+#form-product {
   max-width: 400px;
   margin: 0 auto;
   align-items: center;
