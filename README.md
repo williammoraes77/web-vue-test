@@ -17,6 +17,8 @@
   <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture2.png" alt="App theme" height="150">
   <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture3.png" alt="App theme" height="150">
   <br>
+  <br>
+  <br>
   <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture4.png" alt="App theme" height="200">
   <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture5.png" alt="App theme" height="200">
   <img align="center" src="https://github.com/williammoraes77/web-vue-test/blob/master/public/img/picture6.png" alt="App theme" height="200">
@@ -39,13 +41,13 @@ Tecnologias destacadas no projeto:
 Funcionalidades:
 
 - **Produtos**
-  Cadastrar - Listar - Filtrar - Editar - Excluir
+- Cadastrar - Listar - Filtrar - Editar - Excluir
 
 - **Clientes**
-  Cadastrar - Listar - Filtrar - Editar - Excluir
+- Cadastrar - Listar - Filtrar - Editar - Excluir
 
 - **Pedidos**
-  Cadastrar - Listar - Filtrar - Excluir
+- Cadastrar - Listar - Filtrar - Excluir
 
 # 🤔 Como excutar
 
