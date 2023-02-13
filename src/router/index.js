@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import PeopleView from "../views/PeopleView.vue";
-import PersonEditView from "../views/PersonEditView.vue";
-import OrdersView from "../views/OrdersView.vue";
-import ProductsView from "../views/ProductsView.vue";
-import ProductEditView from "../views/ProductEditView.vue";
+import PeopleView from "../views/People/PeopleView.vue";
+import PersonEditView from "../views/People/PersonEditView.vue";
+import OrdersView from "../views/Orders/OrdersView.vue";
+import ProductsView from "../views/Products/ProductsView.vue";
+import ProductEditView from "../views/Products/ProductEditView.vue";
 
 const routes = [
   {
