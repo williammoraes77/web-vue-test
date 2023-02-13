@@ -49,6 +49,14 @@ Tecnologias destacadas no projeto:
 - **vue-router**
 - **json-server**
 
+### Dependência:
+
+Nodejs
+
+```sh
+https://nodejs.org/en/download/
+```
+
 # 🤔 Como excutar
 
 ### Passo 1: Faça o clone ou download do projeto:
