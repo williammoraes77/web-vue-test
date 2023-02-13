@@ -24,8 +24,8 @@
           <th>Açoes</th>
         </tr>
         <!-- <tr v-for="person in people" :key="person.id"> -->
-        <tr v-for="person in filteredItems" :key="person.id">
-          <td>{{ person.id }}</td>
+        <tr class="separete" v-for="person in filteredItems" :key="person.id">
+          <td>#{{ person.id }}</td>
           <td>{{ person.nome }}</td>
           <td>{{ person.cpf }}</td>
           <td>{{ person.dataNascimento }}</td>
@@ -340,6 +340,7 @@ table.table {
   border-bottom: 1px solid rgb(193, 184, 184);
   padding: 10px 0;
 }
+
 td.edit-buttons {
   text-align: right;
 }
@@ -424,6 +425,10 @@ select {
   color: rgb(241, 234, 234);
 }
 /* end form */
+
+.separete {
+  margin-top: 30px;
+}
 
 @media (max-width: 700px) {
   tr {

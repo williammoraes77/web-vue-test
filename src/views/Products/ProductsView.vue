@@ -27,7 +27,7 @@
           <th>Açoes</th>
         </tr>
         <!-- <tr v-for="product in products" :key="product.id"> -->
-        <tr v-for="product in filteredItems" :key="product.id">
+        <tr class="separete" v-for="product in filteredItems" :key="product.id">
           <td>{{ product.id }}</td>
           <td>{{ product.descricao }}</td>
           <td>{{ product.valoUnitario }}</td>
@@ -351,7 +351,10 @@ select {
   background-color: var(--color-danger);
   color: rgb(241, 234, 234);
 }
-/* end form */
+
+.separete {
+  margin-top: 30px;
+}
 
 @media (max-width: 700px) {
   tr {
