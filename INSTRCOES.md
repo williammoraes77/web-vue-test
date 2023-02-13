@@ -8,8 +8,10 @@ Node: https://nodejs.org/en/download/
 
 2 - rodar o comando "npm install"
 
-3 - em outra janela do terminal/Prompt de Comando rodar o comando "npm run backend"
+3 - no terminal/Prompt de Comando rodar o comando "npm run backend"
 
-4 - rodar o comando "npm run serve"
+4 - em outra janela do terminal/Prompt rodar o comando "npm run serve"
 
 5 - copiar o link que aprece no terminal e colar no navegador.
+
+OBS: os comandos dos passos 4 e 5 devem estar rodando ao mesmo tempo.
