@@ -22,7 +22,6 @@
       <Message :msg="msg" v-show="msg" :type="msg_type" />
       <div class="father">
         <div class="card" v-for="order in filteredItems" :key="order.id">
-          <!-- <div class="card"> -->
           <div class="title-content">
             <h2 class="order_id">#{{ order.id }}</h2>
             <div class="order_actions">
@@ -175,7 +174,7 @@ export default {
       this.msg = "";
 
       if (this.products.length <= 0) {
-        this.msg = "Nenum produto selecionado!";
+        this.msg = "Nenhum produto selecionado!";
         this.msg_type = "danger";
 
         setTimeout(() => (this.msg = ""), 3000);
@@ -189,9 +188,9 @@ export default {
       let month = date.getMonth() + 1;
       let year = date.getFullYear();
 
-      let currentDate = `${year}-${month}-${day}`;
+      let formatedDate = `${year}-${month}-${day}`;
 
-      const finfClient = await this.getPerson(this.client);
+      const clientSelectedData = await this.getPerson(this.client);
 
       let totalValue = 0;
       for (let i = 0; i < this.products.length; i++) {
@@ -213,10 +212,10 @@ export default {
 
       const data = {
         cliente: {
-          id: finfClient.id,
-          nome: finfClient.nome,
+          id: clientSelectedData.id,
+          nome: clientSelectedData.nome,
         },
-        dataEmissao: currentDate,
+        dataEmissao: formatedDate,
         valorTotal: totalValue,
         itens: this.productsClient,
       };
@@ -295,10 +294,6 @@ export default {
 main {
   align-items: center;
 }
-
-/* body {
-  padding: 2em;
-} */
 
 .search-content {
   width: 100%;
@@ -434,45 +429,6 @@ select {
   color: var(--color-success);
 }
 
-/* .total-conntent {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
-  border-top: 2px solid var(--color-text-light);
-}
-
-.total-conntent h3 {
-  margin-top: 15px;
-  font-size: 16px;
-}
-
-.title-md {
-  font-size: 12px;
-  color: var(--color-text-light);
-}
-
-.title-lg {
-  font-size: 60px;
-  color: var(--color-success);
-}
-
-.total-conntent h3 {
-  font-size: 28px;
-  color: var(--color-success);
-}
-
-.total-content .total-tile h3 {
-  font-size: 18px;
-  color: var(--color-text-light);
-}
-
-.title-md {
-  font-size: 12px;
-  color: var(--color-text-light);
-} */
-
-/* form */
 #form-product {
   max-width: 400px;
   margin: 0 auto;
@@ -544,12 +500,6 @@ select {
 /* end form */
 
 @media (max-width: 700px) {
-  /* input {
-    width: 70%;
-  }
-  .search-content {
-    justify-content: center;
-  } */
 }
 
 @media (min-width: 700px) {
