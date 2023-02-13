@@ -41,11 +41,14 @@
             <h3>{{ order.dataEmissao }}</h3>
           </div>
           <div class="items-conntent">
-            <div class="item-card" v-for="item in order.itens" :key="item.id">
-              <h3>{{ item.produto.descricao }}</h3>
-              <h3 class="title-md">{{ item.quantidade }} x {{ item.valor }}</h3>
-              <h3 class="title-lg">R${{ item.subtotal }}</h3>
-            </div>
+            <CardProductOrder
+              v-for="item in order.itens"
+              :key="item.id"
+              :amount="item.quantidade"
+              :description="item.produto.descricao"
+              :price="item.valor"
+              :subTotal="item.subtotal"
+            />
           </div>
           <div class="total-conntent">
             <h3 class="title-md">Valor Total</h3>
@@ -58,7 +61,6 @@
   </main>
   <Modal :open="isOpen" @close="isOpen = !isOpen" :closeBtn="true">
     <form id="form-product" method="POST" @submit="createOrder">
-      <!-- <div class="input-container"> -->
       <div class="client-content">
         <label for="input_description">Selecione o cliente:</label>
         <select name="client" id="client" v-model="client" required>
@@ -105,11 +107,12 @@ import api from "@/services/api";
 import Button from "@/components/Button.vue";
 import Modal from "@/components/Modal.vue";
 import Message from "@/components/Message.vue";
+import CardProductOrder from "@/components/CardProductOrder.vue";
 import { ref } from "vue";
 
 export default {
   name: "OrdersView",
-  components: { Button, Modal, Message },
+  components: { Button, Modal, Message, CardProductOrder },
   data() {
     return {
       orders: [],

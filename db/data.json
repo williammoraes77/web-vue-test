@@ -123,26 +123,6 @@
         }
       ],
       "id": 3
-    },
-    {
-      "cliente": {
-        "id": 1,
-        "nome": "William"
-      },
-      "dataEmissao": "2023-2-13",
-      "valorTotal": 3,
-      "itens": [
-        {
-          "id": 1,
-          "quantidade": 1,
-          "subtotal": 3,
-          "produto": {
-            "id": 1,
-            "descricao": "Caneta"
-          }
-        }
-      ],
-      "id": 4
     }
   ]
 }
